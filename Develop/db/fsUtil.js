@@ -1,3 +1,24 @@
 const fs = require('fs');
-// universal indentifier 
+// universal unique indentifier 
 const uuidv1 = require('uuid/v1');
+const util = require('util');
+
+const readTheFile = util.promisify(fs.readFile);
+const writeTheFile = util.promisify(fs.writeFile);
+
+class storeNote {
+    getNote() {
+        return readTheFile('db/db.json', 'utf8').then((note) => {
+            return JSON.parse(notes)
+        })
+    }
+    addNote(note) {
+        const {title, text} = note;
+         
+        if (!title || !text) {
+            throw new error('Please enter title and text as directed');
+        }
+
+        const newNote = {title, text, id: uuidv1() };
+    }
+}
