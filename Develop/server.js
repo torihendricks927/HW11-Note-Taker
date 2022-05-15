@@ -1,7 +1,9 @@
 const express = require('express');
-const app = express();
-const path = require('path');
 
+// const path = require('path');
+const htmlRoute = require('./public/routes/htmlRoute');
+const apiRoute = require('./public/routes/apiRoute')
+const app = express();
 const PORT = process.env.PORT || 3001;
 
 // middleware
@@ -9,7 +11,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// // GET for notes.html file
+// API route call
+// POST for notes.html
+app.post('/api/notes', (req,res) => {
+    res.json('post!');
+});
+
+app.use('/api/notes', (req,res) => {
+
+})
+
+
+
+
+// HTML Route Call
+app.use('/', htmlRoute);
+
+// GET for notes.html file
 // app.get('/notes', (req,res) => {
 //     res.sendFile(path.join(__dirname, '/public/notes.html'));
 // });
@@ -23,11 +41,6 @@ app.use(express.static('public'));
 // app.get('/api/notes', (req,res) => {
 //     res.sendFile
 // })
-
-// POST for notes.html
-// app.post('/api/notes', (req,res) => {
-//     res.json('post!');
-// });
 
 
 // starts PORT server
