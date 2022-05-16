@@ -1,5 +1,11 @@
 const path = require('path');
 const router = require('express').Router();
+const {
+    readFromFile,
+    readAndAppend,
+    writeToFile,
+} = require('../helpers/fsUtils');
+
 
 // GET call
 router.get('/notes', (req,res) => {
@@ -8,7 +14,9 @@ router.get('/notes', (req,res) => {
 
 // POST for notes.html
 router.post('/notes', (req,res) => {
-    res.json('Post Completed');
+    const newnote = req.body;
+    newNote.id = uuidv4();
+    readAndAppend(newNote,'./db/db.json');
 });
 
 
