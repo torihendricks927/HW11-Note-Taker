@@ -9,7 +9,7 @@ const writeTheFile = util.promisify(fs.writeFile);
 class storeNote {
     getNote() {
         return readTheFile('db/db.json', 'utf8').then((note) => {
-            return JSON.parse(notes)
+            return JSON.parse(note)
         })
     }
     addNote(note) {
@@ -20,5 +20,11 @@ class storeNote {
         }
 
         const newNote = {title, text, id: uuidv1() };
+        this.getNote().then((note) => {
+          note.push(newNote);
+
+        });
     }
 }
+
+module.exports = new storeNote;
